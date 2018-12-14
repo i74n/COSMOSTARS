@@ -1,10 +1,15 @@
-﻿Build started 14.12.2018 15:24:00.
+﻿Build started 14.12.2018 18:29:26.
      1>Project "C:\games\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\COSMOSTARS.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          F:\VS2010\VC\bin\CL.exe /c /IC:\games\COSMOSTARS\COSMOSTARS\SFML\include /ZI /nologo /W3 /WX- /Od /Oy- /D SMFL_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
+     1>c:\games\cosmostars\cosmostars\main.cpp(58): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\games\cosmostars\cosmostars\main.cpp(60): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\games\cosmostars\cosmostars\main.cpp(90): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\games\cosmostars\cosmostars\main.cpp(92): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\games\cosmostars\cosmostars\main.cpp(117): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -23,4 +28,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.98
+Time Elapsed 00:00:01.04
