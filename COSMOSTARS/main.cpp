@@ -10,7 +10,8 @@ protected:
 	Texture texture;
 public:
 	Sprite sprite;
-
+	
+	Entity() {}
 	Entity(std::string path){
 		texture.loadFromFile(path); // загружаем изображение игрока
 		sprite.setTexture(texture);
@@ -24,6 +25,22 @@ public:
 	}
 };
 
+class Asteroid:public Entity{
+	int hp;
+public:
+	Asteroid(std::string path):Entity(path){}
+	void move(){}
+};
+
+
+
+class Bonus:public Entity{
+public:
+	Buff buff;
+	Bonus(std::string path, Buff buff):Entity(path), buff(buff){}
+	void move(){}
+};
+
 class Player:public Entity{
 	int hp;
 public:
@@ -31,9 +48,9 @@ public:
 	void move(){
 		Vector2f position = sprite.getPosition();
 		if (position.y > 0 && Keyboard::isKeyPressed(Keyboard::Up))
-			sprite.move(0, -0.1); 
+			sprite.move(0, -0.5); 
 		else if (position.y < 444 && Keyboard::isKeyPressed(Keyboard::Down)) 
-			sprite.move(0, 0.1);
+			sprite.move(0, 0.5);
 		else if (Keyboard::isKeyPressed(Keyboard::Space))
 			this->attack();
 	}
@@ -54,36 +71,12 @@ public:
 	}
 };
 
-class Asteroid:public Entity{
-	int hp;
-public:
-	Asteroid(std::string path):Entity(path){
-	void move(){}
-};
-
-class Bonus:public Entity{
-public:
-	Buff buff;
-	Bonus(std::string path, Buff buff):Entity(path), buff(buff){}
-	void move(){}
-};
-
-class Map:public Entity{
-	Image image;//объект изображени¤ дл¤ карты
-public:
-	Map(std::string path){
-		image.loadFromFile(path);//загружаем файл дл¤ карты
-		texture.loadFromImage(image);//зар¤жаем текстуру картинкой
-		sprite.setTexture(texture);//заливаем текстуру спрайтом
-	}
-};
-
 int main(){
 	VideoMode desktop = VideoMode::getDesktopMode();
 	RenderWindow window(VideoMode(960, 540, desktop.bitsPerPixel), "Cosmo");
 
 	Player player("images/ship.png");
-	Map map("images/cosmos.png");
+	Entity map("images/cosmos.png");
 	Clock clock; 
 
 	player.setPosition(0, 270);//
@@ -102,13 +95,13 @@ int main(){
 			i = 0;
 
 		map.setPosition(-i, 0);
-		clock.restart();
 		player.move();
 		
 		window.clear();
 		window.draw(map.sprite);
 		window.draw(player.sprite);
 		window.display(); 
+		clock.restart();
 	}
 
 	return 0;
