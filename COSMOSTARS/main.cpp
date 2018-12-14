@@ -22,6 +22,17 @@ public:
 int main(){
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	sf::RenderWindow window(sf::VideoMode(960, 540, desktop.bitsPerPixel), "Cosmo");
+	
+	Image map_image;//объект изображени§ дл§ карты
+	map_image.loadFromFile("images/cosmos.png");//загружаем файл дл§ карты
+	Texture map;//текстура карты
+	map.loadFromImage(map_image);//зар§жаем текстуру картинкой
+	Sprite mapSprite;//созда™м спрайт дл§ карты
+	mapSprite.setTexture(map);//заливаем текстуру спрайтом
+	
+	Clock clock; 
+	
+	float i = 0;
 
 	// ќсновной (бесконечный) цикл
 	while (window.isOpen()){
@@ -29,7 +40,13 @@ int main(){
 		while (window.pollEvent(event)) //ќпрос событий
 			if (event.type == sf::Event::Closed)
 				window.close();
+			
+		float time = clock.getElapsedTime().asSeconds();
+		if (int(i += time*1000) >= 960) 
+			i = 0;
 
+		mapSprite.setPosition(-i, 0);
+		clock.restart();
 		window.clear(); //ќчищаем экран
 		window.display(); 
 	}
