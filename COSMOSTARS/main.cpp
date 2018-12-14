@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+enum Buff {HP, DEATHLESS, SPEEDUP};
 using namespace sf;
 
 class Entity{
@@ -40,21 +41,40 @@ public:
 	void attack(){
 		std::cout << "ATTACK";
 	}
+
+	void get_buff(Bonus bonus){
+		switch (bonus.buff){
+			case HP: 
+				break;
+			case DEATHLESS: 
+				break;
+			case SPEEDUP: 
+				break;
+		}
+	}
 };
 
-class Map{
-	Image image;//объект изображени¤ дл¤ карты
-	Texture texture;//текстура карты
+class Asteroid:public Entity{
+	int hp;
 public:
-	Sprite sprite;//создаЄм спрайт дл¤ карты
+	Asteroid(std::string path):Entity(path){
+	void move(){}
+};
+
+class Bonus:public Entity{
+public:
+	Buff buff;
+	Bonus(std::string path, Buff buff):Entity(path), buff(buff){}
+	void move(){}
+};
+
+class Map:public Entity{
+	Image image;//объект изображени¤ дл¤ карты
+public:
 	Map(std::string path){
 		image.loadFromFile(path);//загружаем файл дл¤ карты
 		texture.loadFromImage(image);//зар¤жаем текстуру картинкой
 		sprite.setTexture(texture);//заливаем текстуру спрайтом
-	}
-
-	void setPosition(float x, float y) {
-		sprite.setPosition(x, y);
 	}
 };
 
@@ -90,5 +110,6 @@ int main(){
 		window.draw(player.sprite);
 		window.display(); 
 	}
+
 	return 0;
 }
