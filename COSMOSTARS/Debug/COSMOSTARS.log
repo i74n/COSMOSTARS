@@ -1,5 +1,5 @@
-﻿Build started 20.12.2018 0:18:31.
-     1>Project "C:\study\TP\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" on node 2 (build target(s)).
+﻿Build started 21.12.2018 18:17:57.
+     1>Project "C:\games\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\COSMOSTARS.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
@@ -13,8 +13,8 @@
        FinalizeBuildStatus:
          Deleting file "Debug\COSMOSTARS.unsuccessfulbuild".
          Touching "Debug\COSMOSTARS.lastbuildstate".
-     1>Done Building Project "C:\study\TP\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" (build target(s)).
+     1>Done Building Project "C:\games\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.16
+Time Elapsed 00:00:00.06

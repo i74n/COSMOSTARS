@@ -16,6 +16,7 @@ protected:
 
 public:
 	Vector2f position;
+	int width, height;
 
 	Entity() {}
 
@@ -35,6 +36,12 @@ public:
 	}
 
 	virtual Move_result move(float) = 0;
+
+	void getSize(){
+		Vector2u size = texture.getSize();
+		width = size.x;
+		height = size.y;
+	}
 };
 
 class Map:public Entity{
@@ -79,6 +86,7 @@ public:
 		position.y = rand()%540+0;
 
 		makeTexture("images/asteroid_"+size+".png");
+		getSize();
 	}
 
 	Move_result move(float time){
@@ -90,10 +98,16 @@ public:
 
 	std::string randSize(){
 		std::string size;
+
 		int dist = rand()%100;
-		if (dist < 70) size = "M";
-		else if (dist >90) 	size = "L"; 
-		else size = "S";
+
+		if (dist < 70)
+			size = "M";
+		else if (dist > 90)
+			size = "L"; 
+		else 
+			size = "S";
+
 		return size;
 	}
 };
@@ -119,6 +133,7 @@ public:
 		position.y += 37;
 
 		makeTexture("images/bullet.png");
+		getSize();
 	}
 
 	Move_result move(float time){
@@ -137,6 +152,7 @@ public:
 		position.y = 270;
 
 		makeTexture("images/ship.png");
+		getSize();
 	}
 
 	Move_result move(float time){
@@ -163,17 +179,18 @@ public:
 	}
 };
 
-
 int main(){
 	srand(time(NULL));
 	VideoMode desktop = VideoMode::getDesktopMode();
 	RenderWindow window(VideoMode(960, 540, desktop.bitsPerPixel), "Cosmo");
 
-	static Entity* arr[] = {new Map(), new Player()};
-	std::vector<Entity*> entities(arr, arr + sizeof(arr)/sizeof(arr[0]));
+	Player* player = new Player;
+	Map* map = new Map;
+
+	std::vector<Entity*> IFO, shots;
 
 	Clock clock; 
-	float bullet_cooldown = 0, asteroid_cooldown = 0;
+	float shot_cooldown = 0, asteroid_cooldown = 0;
 
 	while (window.isOpen()){
 		bool flag = false;
@@ -184,33 +201,41 @@ int main(){
 
 		window.clear();
 
-		float time = clock.getElapsedTime().asSeconds();
-		  
-		for(std::vector<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it){
-			window.draw((*it)->getSprite());
+		float time = clock.getElapsedTime().asSeconds();	
 
-			switch ((*it)->move(time)){
-				case del: 
-					entities.erase(it--);
-					break;
-				case make: 
-					flag = true;
-					break;
-				case stay: 
-					break;
-			}
-		}
-
-		bullet_cooldown += time;
-		if (flag && (bullet_cooldown > 0.01)){
-			entities.push_back(new Laser((entities[1])->position));
-			bullet_cooldown = 0;
-		}
+		map->move(time);
+		
+		window.draw(map->getSprite());
+		window.draw(player->getSprite());
+			
 
 		asteroid_cooldown += time;
-		if (asteroid_cooldown > 0.1){
-			entities.push_back(new Asteroid());
+		if (asteroid_cooldown > 0.01){
+			IFO.push_back(new Asteroid());
 			asteroid_cooldown = 0;
+		}
+
+		for(std::vector<Entity*>::iterator it = IFO.begin(); it != IFO.end();){
+			window.draw((*it)->getSprite());
+
+			if ((*it)->move(time) == del)
+					it = IFO.erase(it);
+			else it++;
+		}
+
+		shot_cooldown += time;
+		if ((player->move(time) == make) && (shot_cooldown > 0.01)){
+			shots.push_back(new Laser(player->position));
+			shot_cooldown = 0;
+		}
+
+		for(std::vector<Entity*>::iterator it = shots.begin(); it != shots.end();){
+			window.draw((*it)->getSprite());
+
+			if ((*it)->move(time) == del)
+					it = shots.erase(it);
+			else it++;
+
 		}
 		
 		window.display(); 
