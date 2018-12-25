@@ -2,10 +2,14 @@
 
 Entity::Entity() {}
 
-void Entity::makeTexture(std::string path){
+void Entity::makeTexture(std::string path, float scale){
 	texture.loadFromFile(path); // загружаем изображение игрока
 	sprite.setTexture(texture);
-	size = texture.getSize();
+	if (scale != 1)
+		sprite.setScale(scale, scale);
+	Vector2u size2u = texture.getSize();
+	size.x = scale*size2u.x;
+	size.y = scale*size2u.y;
 }
 
 void Entity::setPosition(float x, float y){
@@ -19,8 +23,8 @@ Sprite Entity::getSprite(){
 }
 
 bool Entity::intersects(Entity * obj){
-	FloatRect thisRect = this->getSprite().getGlobalBounds();
-	FloatRect objRect = obj->getSprite().getGlobalBounds();
-	return thisRect.intersects(objRect);		 
+	return this->getSprite().getGlobalBounds().intersects(
+		obj->getSprite().getGlobalBounds()
+	);		 
 }
  

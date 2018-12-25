@@ -10,11 +10,12 @@ class Asteroid:public Entity{
 	float scale;
 public:
 	int hp;
-	Asteroid();
-	Move_result move(float time);
+	Asteroid(float prescale = 0);
+	MoveResult move(float time);
 	void setScale();
 	bool isAlive();
 	void getDamage();
+	float getScale();
 	int getReward();
 	bool isExploded();
 	Sprite explosion(float time);

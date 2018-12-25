@@ -2,14 +2,13 @@
 #include <sstream>
 
 Player::Player(){
-	position.x = 0;
-	position.y = 270;
 	scores = 100;
 	shot_cooldown = 0;
 	makeTexture("images/ship.png");
+	setPosition(0, 270);
 }
 
-Move_result Player::move(float time){
+MoveResult Player::move(float time){
 	shot_cooldown += time;
 
 	if (position.y > 0 && Keyboard::isKeyPressed(Keyboard::Up))
@@ -25,13 +24,13 @@ Move_result Player::move(float time){
 	return stay;
 }
 
-void Player::get_buff(Bonus bonus){
-	switch (bonus.buff){
-	case HP: 
+void Player::setBuff(Buff buff){
+	switch (buff){
+	case x2: 
 		break;
-	case DEATHLESS: 
+	case demolisher: 
 		break;
-	case SPEEDUP: 
+	case shield: 
 		break;
 	}
 }

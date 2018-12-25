@@ -5,12 +5,12 @@ Laser::Laser(Player * player){
 	alive = true;
 	makeTexture("images/bullet.png");
 
-	position = player -> position;
-	position.x += player->size.x;
-	position.y += player->size.y/2 - this->size.y/2;
+	setPosition(player->position.x + player->size.x,
+		player->position.y + player->size.y/2 - this->size.y/2
+	);
 }
 
-Move_result Laser::move(float time){
+MoveResult Laser::move(float time){
 	position.x += 50*time*500;
 	sprite.setPosition(position);
 

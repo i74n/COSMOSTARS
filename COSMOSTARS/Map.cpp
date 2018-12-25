@@ -2,14 +2,15 @@
 
 Map::Map(){
 	makeTexture("images/cosmos.png");
+	sprite.setScale(2, 2);
 	displace = 0;
 }
 
-Move_result Map::move(float time){
-	if (int(displace += time*1000) >= 960) 
+MoveResult Map::move(float time){
+	if (int(displace -= time*5000) <= -1920)
 		displace = 0;
 
-	setPosition(-displace, 0);
+	setPosition(displace, 0);
 
 	return stay;
 }

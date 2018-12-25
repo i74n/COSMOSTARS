@@ -3,8 +3,9 @@
 
 class Map:public Entity{
 	float displace;
+	float crement;
 public:
 	Map();
-	Move_result move(float time);
+	MoveResult move(float time);
 	bool isAlive();
 };

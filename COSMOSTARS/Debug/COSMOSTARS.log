@@ -1,23 +1,15 @@
-﻿Построение начато 24.12.2018 7:29:49.
-     1>Проект "D:\COSMOSTARS\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" в узле 2 (целевые объекты build).
+﻿Build started 25.12.2018 17:44:51.
+     1>Project "C:\games\COSMOSTARS\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Создание "Debug\COSMOSTARS.unsuccessfulbuild", так как было задано "AlwaysCreate".
+         Creating "Debug\COSMOSTARS.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ID:\COSMOSTARS\COSMOSTARS\COSMOSTARS\SFML\include /ZI /nologo /W3 /WX- /Od /Oy- /D SMFL_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Asteroid.cpp main.cpp
+         F:\VS2010\VC\bin\CL.exe /c /Ic:\games\cosmostars\cosmostars\cosmostars\sfml\include /ZI /nologo /W3 /WX- /Od /Oy- /D SMFL_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>d:\cosmostars\cosmostars\cosmostars\main.cpp(8): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-         Asteroid.cpp
-     1>d:\cosmostars\cosmostars\cosmostars\asteroid.cpp(7): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-     1>d:\cosmostars\cosmostars\cosmostars\asteroid.cpp(9): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-     1>d:\cosmostars\cosmostars\cosmostars\asteroid.cpp(15): warning C4244: =: преобразование "unsigned int" в "float", возможна потеря данных
-     1>d:\cosmostars\cosmostars\cosmostars\asteroid.cpp(39): warning C4305: =: усечение из "double" к "float"
-     1>d:\cosmostars\cosmostars\cosmostars\asteroid.cpp(43): warning C4305: =: усечение из "double" к "float"
-     1>d:\cosmostars\cosmostars\cosmostars\asteroid.cpp(64): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-         Создание кода...
+     1>c:\games\cosmostars\cosmostars\cosmostars\main.cpp(8): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
        ManifestResourceCompile:
-         Для всех выходных данных обновления не требуется.
+         All outputs are up-to-date.
        Link:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\COSMOSTARS\COSMOSTARS\COSMOSTARS\SFML\lib "sfml-window-s-d.lib" "sfml-window-d.lib" "sfml-system-s-d.lib" "sfml-system-d.lib" "sfml-network-s-d.lib" "sfml-network-d.lib" "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-audio-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\COSMOSTARS.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.lib" /MACHINE:X86 Debug\COSMOSTARS.exe.embed.manifest.res
+         F:\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\games\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.exe" /INCREMENTAL /NOLOGO /LIBPATH:c:\games\cosmostars\cosmostars\cosmostars\sfml\lib "sfml-window-s-d.lib" "sfml-window-d.lib" "sfml-system-s-d.lib" "sfml-system-d.lib" "sfml-network-s-d.lib" "sfml-network-d.lib" "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-audio-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\COSMOSTARS.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\games\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\games\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.lib" /MACHINE:X86 Debug\COSMOSTARS.exe.embed.manifest.res
          Debug\Asteroid.obj
          Debug\Bonus.obj
          Debug\Entity.obj
@@ -27,15 +19,15 @@
          Debug\Player.obj
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\COSMOSTARS.exe.embed.manifest" /manifest Debug\COSMOSTARS.exe.intermediate.manifest
-         Для всех выходных данных обновления не требуется.
+         All outputs are up-to-date.
        LinkEmbedManifest:
-         Для всех выходных данных обновления не требуется.
-         COSMOSTARS.vcxproj -> D:\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.exe
+         All outputs are up-to-date.
+         COSMOSTARS.vcxproj -> C:\games\COSMOSTARS\COSMOSTARS\Debug\COSMOSTARS.exe
        FinalizeBuildStatus:
-         Файл "Debug\COSMOSTARS.unsuccessfulbuild" удаляется.
-         Обращение к "Debug\COSMOSTARS.lastbuildstate".
-     1>Построение проекта "D:\COSMOSTARS\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" завершено (целевые объекты build).
+         Deleting file "Debug\COSMOSTARS.unsuccessfulbuild".
+         Touching "Debug\COSMOSTARS.lastbuildstate".
+     1>Done Building Project "C:\games\COSMOSTARS\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" (build target(s)).
 
-Построение успешно завершено.
+Build succeeded.
 
-Затраченное время: 00:00:02.07
+Time Elapsed 00:00:01.37

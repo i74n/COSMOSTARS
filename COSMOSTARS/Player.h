@@ -7,8 +7,8 @@ class Player:public Entity{
 	float shot_cooldown;
 public:
 	Player();
-	Move_result move(float time);
-	void get_buff(Bonus bonus);
+	MoveResult move(float time);
+	void setBuff(Buff buff);
 	bool isAlive();
 	std::string getScores();
 	void setScores(int crement);
