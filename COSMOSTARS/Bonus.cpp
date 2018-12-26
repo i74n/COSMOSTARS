@@ -15,7 +15,7 @@ Bonus::Bonus(Vector2f playerPose){
 	setPosition(playerPose.x+16, playerPose.y+16);
 }
 
-MoveResult Bonus::move(float time){
+Status Bonus::update(float time){
 	position.x -= time*1000;
 	sprite.setPosition(position);
 
@@ -25,6 +25,6 @@ MoveResult Bonus::move(float time){
 	return stay;
 }
 
-bool Bonus::isAlive(){return true;}
+
 Buff Bonus::getBuff(){return buff;}
  

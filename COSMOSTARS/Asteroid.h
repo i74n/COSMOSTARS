@@ -2,21 +2,22 @@
 #include "Entity.h"
 
 class Asteroid:public Entity{
-	float speed;
 	int reward;
 	Texture explosionTexture;
 	Sprite explosionSprite;
 	float explosionFrame;
 	float scale;
+	Vector2f speed;
+	Status status;
 public:
 	int hp;
-	Asteroid(float prescale = 0);
-	MoveResult move(float time);
+	Asteroid();
+	Asteroid(float x, float y, float speedX, float speedY);
+	Status update(float time);
 	void setScale();
-	bool isAlive();
-	void getDamage();
 	float getScale();
+	void getDamage();
+	bool isAlive();
 	int getReward();
-	bool isExploded();
 	Sprite explosion(float time);
 };

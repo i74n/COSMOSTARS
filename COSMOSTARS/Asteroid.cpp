@@ -1,46 +1,68 @@
 #include "Asteroid.h"
-#include <iostream>
 
-Asteroid::Asteroid(float prescale):Entity(){
+Asteroid::Asteroid(){
 	explosionFrame = 0; 
-	if (!(scale = prescale)) 
-		setScale();
+	setScale();
 
 	hp = 4*scale;
-	speed = 2/scale;
+	speed.x = 2/scale;
+	speed.y = 0;
 	reward = 12*scale;
+	
+	switch (rand()%2){
+	case 0: makeTexture("images/asteroid0.png", scale);break;
+	case 1: makeTexture("images/asteroid1.png", scale);break;
+	case 2: makeTexture("images/asteroid2.png", scale);break;
+	}
 
-	makeTexture("images/asteroid"+std::to_string((unsigned long long)rand()%2)+".png", scale);
-
-	setPosition(900, rand()%(540-size.y));
+	setPosition(900, rand()%(540-size.x));
 
 	explosionTexture.loadFromFile("images/explosion.png");
 	explosionSprite.setTexture(explosionTexture);
 	explosionSprite.setScale(3*scale, 3*scale); 
 }
 
-MoveResult Asteroid::move(float time){
-	position.x -= speed*time*500;
+Asteroid::Asteroid(float x, float y, float speedX, float speedY){
+	explosionFrame = 0; 
+	scale = 0.25;
+
+	hp = 1;
+	speed.x = speedX;
+	speed.y = speedY;
+	reward = 3;
+
+	switch (rand()%2){
+	case 0: makeTexture("images/asteroid0.png", scale);break;
+	case 1: makeTexture("images/asteroid1.png", scale);break;
+	case 2: makeTexture("images/asteroid2.png", scale);break;
+	}
+
+	setPosition(x, y);
+
+	explosionTexture.loadFromFile("images/explosion.png");
+	explosionSprite.setTexture(explosionTexture);
+	explosionSprite.setScale(0.75, 0.75); 
+}
+
+Status Asteroid::update(float time){
+	position.x -= speed.x*time*500;
+	position.y -= speed.y*time*500;
 	sprite.setPosition(position);
 
-	if (position.x < -96){
-		hp = 0;
-		return del;
-	}
-	return stay;
+	if (position.x < -96 || position.x > 960 || position.y > 540 || position.y < -96)
+		return outboard;
+	if (explosionFrame >= 34)
+		return exploded;
+	if (hp <= 0) 
+		return exploding;
+	return alive;
 }
 
 void Asteroid::setScale(){
-	int dist = rand()%100;
-
-	if (dist < 70)
+	if (rand()%100 < 70)
 		scale = 0.5;
 	else 
 		scale = 1; 
-}
-
-bool Asteroid::isAlive(){
-	return hp > 0;
 }
 
 void Asteroid::getDamage(){
@@ -53,10 +75,6 @@ float Asteroid::getScale(){
 
 int Asteroid::getReward(){
 	return reward;
-}
-
-bool Asteroid::isExploded(){
-	return explosionFrame >= 34;
 }
 
 Sprite Asteroid::explosion(float time){

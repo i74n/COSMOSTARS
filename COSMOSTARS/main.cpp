@@ -9,7 +9,6 @@ int main(){
 	VideoMode desktop = VideoMode::getDesktopMode();
 	RenderWindow window(VideoMode(960, 540, desktop.bitsPerPixel), "COSMOSTARS");
 
-
 	Font font;//шрифт 
 	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
 	Text text("", font, 35);//создаем объект текст
@@ -25,7 +24,7 @@ int main(){
 	Clock clock; 
 	float asteroid_cooldown = 0;
 
-	while (window.isOpen() && player->isAlive()){
+	while (window.isOpen()){
 		
 		Event event;
 		while (window.pollEvent(event)) 
@@ -34,19 +33,19 @@ int main(){
 
 		window.clear();
 
-		float time = clock.getElapsedTime().asSeconds()*3;	
+		float time = clock.getElapsedTime().asSeconds();	
 
-		map->move(time);
+		map->update(time);
 
 		window.draw(map->getSprite());
 		window.draw(player->getSprite());
 
-		if (player->move(time) == make)
+		if (player->update(time) == make)
 			lasers.push_back(new Laser(player));
 
 		for(auto bonus = bonuses.begin(); bonus != bonuses.end();){
 			window.draw((*bonus)->getSprite());
-			if ((*bonus)->move(time) == del || !(*bonus)->isAlive())
+			if ((*bonus)->update(time) == del)
 				bonus = bonuses.erase(bonus);
 			else if (player->intersects(*bonus)){
 				player->setBuff((*bonus)->getBuff());
@@ -56,42 +55,52 @@ int main(){
 
 		for(auto laser = lasers.begin(); laser != lasers.end();){
 			window.draw((*laser)->getSprite());
-
+			
 			for(auto asteroid = asteroids.begin(); asteroid != asteroids.end(); asteroid++){
 				if ((*laser)->intersects(*asteroid)){
 					(*asteroid)->getDamage();
 					(*laser)->hit();
 				}
 			}
-			if ((*laser)->move(time) == del || !(*laser)->isAlive())
+			if ((*laser)->update(time) == del)
 				laser = lasers.erase(laser);
 			else laser++;
 		}
 
 		asteroid_cooldown += time;
-		if (asteroid_cooldown > 0.2){
+		if (asteroid_cooldown > 0.3){
 			asteroids.push_back(new Asteroid());
 			asteroid_cooldown = 0;
 		}
 
 		for(auto asteroid = asteroids.begin(); asteroid != asteroids.end();){
-			if (!(*asteroid)->isAlive() && !(*asteroid)->isExploded()) {
+			switch ((*asteroid)->update(time)){
+			case outboard:
+				player->setScores(-(*asteroid)->getReward());
+				asteroid = asteroids.erase(asteroid);
+				continue;
+			case exploding:
 				window.draw((*asteroid)->explosion(time));
 				asteroid++;
-			}else if ((*asteroid)->isExploded()) {
+				continue;
+			case exploded:
 				player->setScores((*asteroid)->getReward());
-				if (!(*asteroid)->isAlive() && (*asteroid)->getScale() == 0.25) 
+				if ((*asteroid)->getScale() == 0.25) 
 					bonuses.push_back(new Bonus((*asteroid)->position));
+				if ((*asteroid)->getScale() == 1) {
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 8, -2));
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 8, 2));
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -8, -2));
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -8, 2));
+				}
 				asteroid = asteroids.erase(asteroid);	
-			}else if ((*asteroid)->move(time) == del){
-				player->setScores(-(*asteroid)->getReward());
-				asteroid = asteroids.erase(asteroid);	
-			}else if (player->intersects(*asteroid)){
-				player->setScores(-2*(*asteroid)->getReward());
-				(*asteroid) -> hp = 0;	
-				asteroid++;
-			}else{
-				window.draw((*asteroid)->getSprite());
+				continue;
+			case alive: 
+				if (player->intersects(*asteroid)){
+					player->setScores(-2*(*asteroid)->getReward());
+					(*asteroid) -> hp = 0;	
+				}else
+					window.draw((*asteroid)->getSprite());
 				asteroid++;
 			}
 		}

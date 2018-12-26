@@ -5,7 +5,7 @@ class Bonus:public Entity{
 public:
 	Buff buff;
 	Bonus(Vector2f playerPose);
-	MoveResult move(float time);
+	Status update(float time);
 	bool isAlive();
 	Buff getBuff();
 };

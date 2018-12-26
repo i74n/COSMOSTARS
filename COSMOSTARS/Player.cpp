@@ -2,13 +2,13 @@
 #include <sstream>
 
 Player::Player(){
-	scores = 100;
+	scores = 1000;
 	shot_cooldown = 0;
 	makeTexture("images/ship.png");
 	setPosition(0, 270);
 }
 
-MoveResult Player::move(float time){
+Status Player::update(float time){
 	shot_cooldown += time;
 
 	if (position.y > 0 && Keyboard::isKeyPressed(Keyboard::Up))
@@ -34,8 +34,6 @@ void Player::setBuff(Buff buff){
 		break;
 	}
 }
-
-bool Player::isAlive(){return scores>0;}
 
 std::string Player::getScores(){
 	std::stringstream ss;

@@ -1,12 +1,10 @@
 #include "Entity.h"
 
-Entity::Entity() {}
 
 void Entity::makeTexture(std::string path, float scale){
 	texture.loadFromFile(path); // загружаем изображение игрока
 	sprite.setTexture(texture);
-	if (scale != 1)
-		sprite.setScale(scale, scale);
+	sprite.setScale(scale, scale);
 	Vector2u size2u = texture.getSize();
 	size.x = scale*size2u.x;
 	size.y = scale*size2u.y;

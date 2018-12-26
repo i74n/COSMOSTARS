@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 enum Buff {x2, demolisher, shield};
-enum MoveResult {del, make, stay};
+enum Status { del, alive, exploding, exploded, outboard, make, stay};
 
 using namespace sf;
 
@@ -11,17 +11,14 @@ class Entity{
 protected:	
 	Texture texture;
 	Sprite sprite;
-
+	Status status;
 public:
 	Vector2f position;
 	Vector2u size;
 
-	Entity();
 	void makeTexture(std::string path, float scale = 1);
 	void setPosition(float x, float y);
 	Sprite getSprite();
-	virtual bool isAlive() = 0;
 	bool intersects(Entity * obj);
-	virtual MoveResult move(float) = 0;
-
+	virtual Status update(float) = 0;
 };

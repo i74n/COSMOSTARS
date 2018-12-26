@@ -3,10 +3,8 @@
 #include "Entity.h"
 
 class Laser:public Entity{
-	bool alive;
 public:
-	Laser(Player * player);
-	MoveResult move(float time);
-	bool isAlive();
+	Laser(const Player * player);
+	Status update(float time);
 	void hit();
 };

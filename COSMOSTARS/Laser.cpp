@@ -1,8 +1,7 @@
 #include "Laser.h"
 #include "Player.h"
 
-Laser::Laser(Player * player){
-	alive = true;
+Laser::Laser(const Player * player){
 	makeTexture("images/bullet.png");
 
 	setPosition(player->position.x + player->size.x,
@@ -10,12 +9,13 @@ Laser::Laser(Player * player){
 	);
 }
 
-MoveResult Laser::move(float time){
-	position.x += 50*time*500;
-	sprite.setPosition(position);
-
-	return (position.x > 960) ? del : stay;
+Status Laser::update(float time){
+	if (status != del){
+		position.x += 50*time*500;
+		sprite.setPosition(position);
+		status = (position.x > 960) ? del : stay;
+	}
+	return status;
 }
 
-bool Laser::isAlive(){return alive;}
-void Laser::hit(){alive = false;}
+void Laser::hit(){status = del;}
