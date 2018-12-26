@@ -45,17 +45,25 @@ Asteroid::Asteroid(float x, float y, float speedX, float speedY){
 }
 
 Status Asteroid::update(float time){
-	position.x -= speed.x*time*500;
-	position.y -= speed.y*time*500;
-	sprite.setPosition(position);
+	if (status == alive){
+		position.x -= speed.x*time*500;
+		position.y -= speed.y*time*500;
+		sprite.setPosition(position);
+	}
+
+	if (status == dead) 
+		return status = exploding;
+	if (explosionFrame >= 34)
+		return status = exploded;
+	if (status == exploding)
+		return status = exploding;
 
 	if (position.x < -96 || position.x > 960 || position.y > 540 || position.y < -96)
-		return outboard;
-	if (explosionFrame >= 34)
-		return exploded;
+		return status = outboard;
 	if (hp <= 0) 
-		return exploding;
-	return alive;
+		return status = dead;
+
+	return status = alive;
 }
 
 void Asteroid::setScale(){
@@ -82,7 +90,7 @@ Sprite Asteroid::explosion(float time){
 	int y = (int)(explosionFrame/5);
 	explosionSprite.setTextureRect(IntRect(x * 96, y * 96, 96, 96));
 	explosionSprite.setPosition(position.x-size.x, position.y-size.y);
-	explosionFrame += time*500;
+	explosionFrame += time*1000;
 
 	return explosionSprite;
 }

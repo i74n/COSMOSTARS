@@ -25,7 +25,7 @@ int main(){
 	float asteroid_cooldown = 0;
 
 	while (window.isOpen()){
-		
+
 		Event event;
 		while (window.pollEvent(event)) 
 			if (event.type == Event::Closed)
@@ -55,16 +55,16 @@ int main(){
 
 		for(auto laser = lasers.begin(); laser != lasers.end();){
 			window.draw((*laser)->getSprite());
-			
-			for(auto asteroid = asteroids.begin(); asteroid != asteroids.end(); asteroid++){
-				if ((*laser)->intersects(*asteroid)){
-					(*asteroid)->getDamage();
-					(*laser)->hit();
-				}
-			}
 			if ((*laser)->update(time) == del)
 				laser = lasers.erase(laser);
-			else laser++;
+			else {
+				for(auto asteroid = asteroids.begin(); asteroid != asteroids.end(); asteroid++)
+					if ((*laser)->intersects(*asteroid)){
+						(*asteroid)->getDamage();
+						(*laser)->hit();
+					}
+				laser++;
+			}
 		}
 
 		asteroid_cooldown += time;
@@ -87,13 +87,16 @@ int main(){
 				player->setScores((*asteroid)->getReward());
 				if ((*asteroid)->getScale() == 0.25) 
 					bonuses.push_back(new Bonus((*asteroid)->position));
-				if ((*asteroid)->getScale() == 1) {
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 8, -2));
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 8, 2));
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -8, -2));
-					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -8, 2));
-				}
 				asteroid = asteroids.erase(asteroid);	
+				continue;
+			case dead:
+				if ((*asteroid)->getScale() == 1) {
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 4, -2));
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, 4, 2));
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -4, -2));
+					asteroids.push_back(new Asteroid((*asteroid)->position.x, (*asteroid)->position.y, -4, 2));
+				}
+				asteroid++;
 				continue;
 			case alive: 
 				if (player->intersects(*asteroid)){
@@ -102,6 +105,7 @@ int main(){
 				}else
 					window.draw((*asteroid)->getSprite());
 				asteroid++;
+				break;
 			}
 		}
 

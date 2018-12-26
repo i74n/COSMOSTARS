@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 enum Buff {x2, demolisher, shield};
-enum Status { del, alive, exploding, exploded, outboard, make, stay};
+enum Status { del, alive, exploding, exploded, outboard, make, stay, dead};
 
 using namespace sf;
 
