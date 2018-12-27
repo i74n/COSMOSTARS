@@ -1,10 +1,13 @@
-﻿Build started 27.12.2018 0:47:11.
+﻿Build started 27.12.2018 21:06:17.
      1>Project "C:\study\TP\COSMOSTARS\COSMOSTARS\COSMOSTARS.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\COSMOSTARS.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Ic:\study\TP\cosmostars\cosmostars\sfml\include /ZI /nologo /W3 /WX- /Od /Oy- /D SMFL_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Asteroid.cpp
          Asteroid.cpp
+     1>c:\study\tp\cosmostars\cosmostars\asteroid.cpp(7): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\study\tp\cosmostars\cosmostars\asteroid.cpp(10): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\study\tp\cosmostars\cosmostars\asteroid.cpp(18): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -29,4 +32,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.15
+Time Elapsed 00:00:07.09

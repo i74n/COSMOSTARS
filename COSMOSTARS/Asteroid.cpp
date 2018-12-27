@@ -53,7 +53,7 @@ Status Asteroid::update(float time){
 
 	if (status == dead) 
 		return status = exploding;
-	if (explosionFrame >= 34)
+	if (explosionFrame >= 10)
 		return status = exploded;
 	if (status == exploding)
 		return status = exploding;
@@ -90,7 +90,7 @@ Sprite Asteroid::explosion(float time){
 	int y = (int)(explosionFrame/5);
 	explosionSprite.setTextureRect(IntRect(x * 96, y * 96, 96, 96));
 	explosionSprite.setPosition(position.x-size.x, position.y-size.y);
-	explosionFrame += time*1000;
+	explosionFrame += time*100;
 
 	return explosionSprite;
 }

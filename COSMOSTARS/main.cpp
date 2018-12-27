@@ -25,7 +25,6 @@ int main(){
 	float asteroid_cooldown = 0;
 
 	while (window.isOpen()){
-
 		Event event;
 		while (window.pollEvent(event)) 
 			if (event.type == Event::Closed)
